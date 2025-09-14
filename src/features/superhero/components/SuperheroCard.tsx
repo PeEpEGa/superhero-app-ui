@@ -3,6 +3,9 @@ interface SuperheroCardProps {
     id: number;
     nickname: string;
     realName?: string | null;
+    images?: {
+      url: string;
+    }[];
     // originDescription: string;
     // catchPhrase?: string | null;
     // type: HeroType;
@@ -18,7 +21,7 @@ export default function SuperheroCard({ superhero }: SuperheroCardProps) {
     <section className="flex flex-col h-full group cursor-pointer">
       <div className="h-[65%]">
         <img
-          src="/explore-no-img.jpg"
+          src={superhero.images?.[0]?.url || "/explore-no-img.jpg"}
           alt="superhero"
           className="w-full h-full object-cover"
         />

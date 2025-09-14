@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import Providers from "./providers.tsx";
 import { RouterProvider } from "@tanstack/react-router";
-import { router } from "./routes/route.config.ts";
+import { router } from "./route.config.ts";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
