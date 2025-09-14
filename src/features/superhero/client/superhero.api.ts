@@ -1,4 +1,7 @@
-import { superheroesResponseSchema } from "../schemas/superhero.schema";
+import {
+  superheroesResponseSchema,
+  superheroSchema,
+} from "../schemas/superhero.schema";
 import { endpoints } from "./endpoints";
 
 const apiBaseUrl = endpoints.baseUrl;
@@ -19,4 +22,18 @@ export async function getSuperheroesPaginated(
   const data = await res.json();
 
   return superheroesResponseSchema.parse(data);
+}
+
+export async function getSuperheroById(id: number) {
+  const url = `${apiBaseUrl}${endpoints.getSuperheroById}${id}`;
+
+  const res = await fetch(url);
+
+  if (!res.ok) {
+    throw new Error("Failed to get a superhero by ID");
+  }
+
+  const data = await res.json();
+
+  return superheroSchema.parse(data);
 }
