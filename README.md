@@ -1,69 +1,75 @@
-# React + TypeScript + Vite
+# 🦸 Superhero App UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React UI for managing superheroes and their powers, built with **TypeScript**, **Tailwind CSS**, **TanStack Router**, **TanStack Query**, **React Hook Form**, and **Zod**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- List, create, edit, and view superheroes
+- Form validation with **Zod** and **React Hook Form**
+- Data fetching and caching with **TanStack Query**
+- Client-side routing with **TanStack Router**
+- Tailwind CSS for responsive and modern styling
+- Modular and scalable project structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🏗 Project Structure
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── public/                 # Images, icons, etc.
+├── features/
+│   ├── super-power/        # Super powers feature
+│   └── superhero/          # Superheroes feature
+│       ├── components/     # Cards, forms, lists, detail views
+│       ├── hooks/          # Custom hooks
+│       ├── pages/          # Page components
+│       ├── queries/        # TanStack Query options
+│       ├── schemas/        # Zod validation schemas
+│       ├── services/       # API services
+│       └── types/          # TypeScript interfaces
+├── routes/                 # TanStack Router route definitions
+├── shared/                 # Shared components, hooks, providers, types
+├── main.tsx                # App entry
+├── providers.tsx           # React providers
+├── route.config.ts         # Router configuration
+├── routeTree.gen.ts        # Auto-generated route tree
+└── index.css               # Tailwind styles
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+🛠 Tech Stack
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **React 19+** — UI library
+- **TypeScript** — Type safety
+- **Tailwind CSS** — Utility-first styling
+- **TanStack Router** — Client-side routing
+- **TanStack Query** — Data fetching & caching
+- **React Hook Form** — Form state management
+- **Zod** — Schema validation
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## ⚡ How to Run Locally
+
+Follow these steps to run the project on your machine:
+
+1. **Clone the repository**
+
 ```
+git clone https://github.com/your-username/superhero-app-ui.git
+cd superhero-app-ui
+
+Install dependencies
+npm install
+
+Start development server
+npm run dev
+
+Build for production
+npm run build
+
+```
+
+🌍 Deployment
+
+The project is deployed on Vercel: https://superhero-app-ui.vercel.app
