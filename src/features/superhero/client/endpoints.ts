@@ -4,4 +4,5 @@ export const endpoints = {
   getSuperheroById: "/superheroes/",
   createSuperhero: "/superheroes",
   updateSuperhero: "/superheroes/",
+  deleteSuperheroById: "/superheroes/",
 };

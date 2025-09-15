@@ -121,3 +121,14 @@ export async function deleteSuperheroImage(
 
   return;
 }
+
+export async function deleteSuperheroById(id: number) {
+  const res = await fetch(
+    `${apiBaseUrl}${endpoints.deleteSuperheroById}${id}`,
+    {
+      method: "DELETE",
+    }
+  );
+  if (!res.ok) throw new Error("Failed to delete superhero");
+  return true;
+}
