@@ -20,7 +20,7 @@ function RootComponent() {
       <Header />
 
       {/* Main content */}
-      <main className="h-full overflow-hidden">
+      <main className="h-full overflow-y-auto">
         <Outlet />
       </main>
     </div>

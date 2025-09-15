@@ -13,7 +13,7 @@ export default function Header() {
           //   fill
           style={{ objectFit: "contain", height: "auto" }}
         /> */}
-        <span className="text-xl">App</span>
+        <span className="text-xl font-extralight">Superhero App</span>
       </Link>
 
       {/* navigation */}
@@ -21,6 +21,7 @@ export default function Header() {
         <Link className="font-semibold" to="/">
           All Superheroes
         </Link>
+        <Link to="/superheroes/create">Add</Link>
         <Link className="font-semibold" to="/superheroes">
           Edit
         </Link>
