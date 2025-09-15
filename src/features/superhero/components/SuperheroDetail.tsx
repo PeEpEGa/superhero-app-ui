@@ -1,6 +1,7 @@
 import { ChevronDown } from "lucide-react";
 import type { Superhero } from "../types/superhero.interface";
 import { useEffect, useState } from "react";
+import { Link } from "@tanstack/react-router";
 
 interface SuperheroDetailProps {
   superhero: Superhero;
@@ -63,6 +64,14 @@ export default function SuperheroDetail({ superhero }: SuperheroDetailProps) {
         className="h-full snap-start bg-gray-900 flex items-center justify-center text-white"
       >
         <p>Section</p>
+        <Link
+          to="/superheroes/$id/edit"
+          params={{ id: superhero.id.toString() }}
+        >
+          Edit
+        </Link>
+        {/* <Link to={`/superheroes/${superhero.id}/edit`}>Edit</Link> */}
+        {/* <button onClick={() => }></button> */}
       </section>
     </article>
   );

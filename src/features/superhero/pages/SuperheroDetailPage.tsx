@@ -1,7 +1,8 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { superheroByIdQueryOptions } from "../queries/superheroByIdQueryOptions";
-import { Route } from "../../../routes/superheroes/$id";
+
 import SuperheroDetail from "../components/SuperheroDetail";
+import { Route } from "../../../routes/superheroes/$id";
 
 export default function SuperheroDetailPage() {
   const { id } = Route.useParams();

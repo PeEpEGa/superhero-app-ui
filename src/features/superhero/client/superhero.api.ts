@@ -58,6 +58,28 @@ export async function createSuperhero(superhero: CreateSuperheroPayload) {
   return superheroSchema.parse(data);
 }
 
+export async function updateSuperhero(
+  id: number,
+  superhero: CreateSuperheroPayload
+) {
+  const url = `${apiBaseUrl}${endpoints.updateSuperhero}${id}`;
+  const res = await fetch(url, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(superhero),
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to update a superhero");
+  }
+
+  const data = await res.json();
+
+  return superheroSchema.parse(data);
+}
+
 export async function addSuperheroImages(
   superheroId: number,
   images: { file: File }[]
@@ -81,4 +103,21 @@ export async function addSuperheroImages(
   }
 
   return await res.json();
+}
+
+export async function deleteSuperheroImage(
+  superheroId: number,
+  imageId: number
+) {
+  const url = `${apiBaseUrl}${endpoints.updateSuperhero}${superheroId}/images/${imageId}`;
+
+  const res = await fetch(url, {
+    method: "DELETE",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to add images to superhero");
+  }
+
+  return;
 }

@@ -13,8 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as SuperheroesIndexRouteImport } from './routes/superheroes/index'
 import { Route as SuperheroesPaginatedRouteImport } from './routes/superheroes/paginated'
 import { Route as SuperheroesCreateRouteImport } from './routes/superheroes/create'
-import { Route as SuperheroesIdRouteImport } from './routes/superheroes/$id'
-import { Route as SuperheroesIdEditRouteImport } from './routes/superheroes/$id.edit'
+import { Route as SuperheroesIdIndexRouteImport } from './routes/superheroes/$id/index'
+import { Route as SuperheroesIdEditRouteImport } from './routes/superheroes/$id/edit'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -36,75 +36,76 @@ const SuperheroesCreateRoute = SuperheroesCreateRouteImport.update({
   path: '/superheroes/create',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SuperheroesIdRoute = SuperheroesIdRouteImport.update({
-  id: '/superheroes/$id',
-  path: '/superheroes/$id',
+const SuperheroesIdIndexRoute = SuperheroesIdIndexRouteImport.update({
+  id: '/superheroes/$id/',
+  path: '/superheroes/$id/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SuperheroesIdEditRoute = SuperheroesIdEditRouteImport.update({
-  id: '/edit',
-  path: '/edit',
-  getParentRoute: () => SuperheroesIdRoute,
+  id: '/superheroes/$id/edit',
+  path: '/superheroes/$id/edit',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/superheroes/$id': typeof SuperheroesIdRouteWithChildren
   '/superheroes/create': typeof SuperheroesCreateRoute
   '/superheroes/paginated': typeof SuperheroesPaginatedRoute
   '/superheroes': typeof SuperheroesIndexRoute
   '/superheroes/$id/edit': typeof SuperheroesIdEditRoute
+  '/superheroes/$id': typeof SuperheroesIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/superheroes/$id': typeof SuperheroesIdRouteWithChildren
   '/superheroes/create': typeof SuperheroesCreateRoute
   '/superheroes/paginated': typeof SuperheroesPaginatedRoute
   '/superheroes': typeof SuperheroesIndexRoute
   '/superheroes/$id/edit': typeof SuperheroesIdEditRoute
+  '/superheroes/$id': typeof SuperheroesIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/superheroes/$id': typeof SuperheroesIdRouteWithChildren
   '/superheroes/create': typeof SuperheroesCreateRoute
   '/superheroes/paginated': typeof SuperheroesPaginatedRoute
   '/superheroes/': typeof SuperheroesIndexRoute
   '/superheroes/$id/edit': typeof SuperheroesIdEditRoute
+  '/superheroes/$id/': typeof SuperheroesIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/superheroes/$id'
     | '/superheroes/create'
     | '/superheroes/paginated'
     | '/superheroes'
     | '/superheroes/$id/edit'
+    | '/superheroes/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/superheroes/$id'
     | '/superheroes/create'
     | '/superheroes/paginated'
     | '/superheroes'
     | '/superheroes/$id/edit'
+    | '/superheroes/$id'
   id:
     | '__root__'
     | '/'
-    | '/superheroes/$id'
     | '/superheroes/create'
     | '/superheroes/paginated'
     | '/superheroes/'
     | '/superheroes/$id/edit'
+    | '/superheroes/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  SuperheroesIdRoute: typeof SuperheroesIdRouteWithChildren
   SuperheroesCreateRoute: typeof SuperheroesCreateRoute
   SuperheroesPaginatedRoute: typeof SuperheroesPaginatedRoute
   SuperheroesIndexRoute: typeof SuperheroesIndexRoute
+  SuperheroesIdEditRoute: typeof SuperheroesIdEditRoute
+  SuperheroesIdIndexRoute: typeof SuperheroesIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -137,41 +138,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SuperheroesCreateRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/superheroes/$id': {
-      id: '/superheroes/$id'
+    '/superheroes/$id/': {
+      id: '/superheroes/$id/'
       path: '/superheroes/$id'
       fullPath: '/superheroes/$id'
-      preLoaderRoute: typeof SuperheroesIdRouteImport
+      preLoaderRoute: typeof SuperheroesIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/superheroes/$id/edit': {
       id: '/superheroes/$id/edit'
-      path: '/edit'
+      path: '/superheroes/$id/edit'
       fullPath: '/superheroes/$id/edit'
       preLoaderRoute: typeof SuperheroesIdEditRouteImport
-      parentRoute: typeof SuperheroesIdRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
 
-interface SuperheroesIdRouteChildren {
-  SuperheroesIdEditRoute: typeof SuperheroesIdEditRoute
-}
-
-const SuperheroesIdRouteChildren: SuperheroesIdRouteChildren = {
-  SuperheroesIdEditRoute: SuperheroesIdEditRoute,
-}
-
-const SuperheroesIdRouteWithChildren = SuperheroesIdRoute._addFileChildren(
-  SuperheroesIdRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  SuperheroesIdRoute: SuperheroesIdRouteWithChildren,
   SuperheroesCreateRoute: SuperheroesCreateRoute,
   SuperheroesPaginatedRoute: SuperheroesPaginatedRoute,
   SuperheroesIndexRoute: SuperheroesIndexRoute,
+  SuperheroesIdEditRoute: SuperheroesIdEditRoute,
+  SuperheroesIdIndexRoute: SuperheroesIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

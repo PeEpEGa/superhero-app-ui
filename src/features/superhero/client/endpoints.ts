@@ -3,4 +3,5 @@ export const endpoints = {
   getSuperheroesPaginated: "/superheroes/paginated",
   getSuperheroById: "/superheroes/",
   createSuperhero: "/superheroes",
+  updateSuperhero: "/superheroes/",
 };

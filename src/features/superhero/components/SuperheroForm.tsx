@@ -1,6 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import type { CreateSuperheroPayload } from "../types/superhero.interface";
+import type {
+  CreateSuperheroPayload,
+  Superhero,
+} from "../types/superhero.interface";
 import { createSuperheroSchema } from "../schemas/superhero.schema";
 import { useEffect, useState } from "react";
 import { getAllSuperPowers } from "../../super-power/client/superPower.api";
@@ -14,7 +17,11 @@ interface ImageData {
   id?: number;
 }
 
-export default function SuperheroForm() {
+export default function SuperheroForm({
+  superhero,
+}: {
+  superhero?: Superhero;
+}) {
   const superheroForm = useForm<CreateSuperheroPayload>({
     resolver: zodResolver(createSuperheroSchema),
     defaultValues: {
@@ -36,17 +43,48 @@ export default function SuperheroForm() {
     reset,
   } = superheroForm;
 
-  const { createSuperhero, isCreating } = useSuperheroForm();
+  const { createSuperhero, updateSuperhero, isCreating } = useSuperheroForm();
+
+  useEffect(() => {
+    if (superhero) {
+      const formSuperPowers = {
+        superPowerIdsToAdd: superhero.superPowers?.map((sp) => sp.id) || [],
+        newSuperPowers: [],
+      };
+
+      reset({
+        nickname: superhero.nickname,
+        realName: superhero.realName || "",
+        originDescription: superhero.originDescription,
+        catchPhrase: superhero.catchPhrase || "",
+        type: superhero.type,
+        superPowers: formSuperPowers,
+      });
+
+      setImages(
+        superhero.images.map((image) => ({
+          preview: image.url,
+          id: image.id,
+        })) || []
+      );
+    }
+  }, [superhero, reset]);
 
   const onSubmit = handleSubmit((data) => {
     try {
-      createSuperhero({ superhero: data, images });
+      if (superhero) {
+        updateSuperhero({ id: superhero.id, superhero: data, images });
+      } else {
+        createSuperhero({ superhero: data, images });
+      }
+
       reset();
       setNewSuperPowers([]);
-      setNewSuperPowerInput("");
       setImages([]);
+      setNewSuperPowerInput("");
+      setSuperPowers([]);
     } catch (error) {
-      console.error("Failed to create superhero:", error);
+      console.error("Failed to submit superhero:", error);
     }
   });
 
