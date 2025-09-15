@@ -73,3 +73,5 @@ npm run build
 🌍 Deployment
 
 The project is deployed on Vercel: https://superhero-app-ui.vercel.app
+
+---
